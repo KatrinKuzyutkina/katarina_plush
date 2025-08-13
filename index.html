@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Мои ссылки</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-from: #ffe59e;
+    --bg-to: #ffb88e;
+    --border: #a97155;
+    --btn-bg: #fea45b;
+    --btn-bg-hover: #ffb06e;
+    --fg: #111;
+    --dot-color: #ff9800;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    font-family: "Inter", sans-serif;
+    background: linear-gradient(135deg, var(--bg-from), var(--bg-to));
+    color: var(--fg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Круги */
+  .circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.35;
+    z-index: 0;
+  }
+  .circle.yellow { background: #ffd54f; }
+  .circle.orange { background: #ff9800; }
+
+  /* Волны */
+  .wave {
+    position: absolute;
+    opacity: 0.65;
+    z-index: 0;
+  }
+  .wave svg {
+    width: 100%;
+    height: 100%;
+  }
+  .dotted {
+    fill: none;
+    stroke: var(--dot-color);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-dasharray: 0 14;
+  }
+
+  /* Конкретные волны */
+  .wave.top-left {
+    top: -100px;
+    left: -100px;
+    width: 700px;
+    height: 400px;
+    transform: rotate(-25deg);
+  }
+  .wave.bottom-right {
+    bottom: -100px;
+    right: -100px;
+    width: 700px;
+    height: 400px;
+    transform: rotate(155deg);
+  }
+  .wave.top-left-lower {
+    top: 60px;
+    left: -100px;
+    width: 900px;
+    height: 400px;
+    transform: rotate(-25deg);
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 20px;
+    z-index: 1;
+  }
+  h1 { margin: 0; font-size: 1.8rem; font-weight: 600; }
+  p { margin: 5px 0 0; opacity: 0.8; }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 1;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .btn {
+    text-decoration: none;
+    text-align: center;
+    padding: 14px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    background: var(--btn-bg);
+    color: var(--fg);
+    font-weight: 600;
+    transition: background 0.25s ease, transform 0.1s ease;
+  }
+  .btn:hover {
+    background: var(--btn-bg-hover);
+    transform: translateY(-1px);
+  }
+
+  /* Медиа-запросы */
+  @media (max-width: 768px) {
+    .circle.yellow:nth-child(3),
+    .circle.orange:nth-child(6),
+    .circle.yellow:nth-child(5) {
+        display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    h1 { font-size: 1.5rem; }
+    .links { max-width: 90%; }
+    .btn { padding: 12px; font-size: 0.9rem; }
+    .wave { width: 350px; height: 250px; }
+    .wave.top-left-lower { width: 600px; height: 250px; display: none; }
+    .circle.yellow:nth-child(1),
+    .circle.orange:nth-child(5) {
+        display: none;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+  <!-- Круги -->
+  <div class="circle yellow" style="width:140px;height:140px;top:30px;left:50px;"></div>
+  <div class="circle orange" style="width:90px;height:90px;top:220px;right:60px;"></div>
+  <div class="circle yellow" style="width:70px;height:70px;bottom:50px;left:30px;"></div>
+  <div class="circle orange" style="width:150px;height:150px;bottom:-40px;right:-40px;"></div>
+  <div class="circle yellow" style="width:120px;height:120px;top:180px;left:200px;"></div>
+  <div class="circle orange" style="width:100px;height:100px;bottom:150px;right:100px;"></div>
+
+  <!-- Волны -->
+  <div class="wave top-left">
+    <svg viewBox="0 0 600 400" preserveAspectRatio="none">
+      <path class="dotted" d="M0,200 C150,150 300,250 450,200 S750,150 900,200" />
+      <path class="dotted" d="M0,230 C150,180 300,280 450,230 S750,180 900,230" />
+    </svg>
+  </div>
+
+  <div class="wave top-left-lower">
+    <svg viewBox="0 0 900 400" preserveAspectRatio="none">
+      <path class="dotted" d="M0,160 C200,120 400,200 600,160 S1000,120 1200,160" />
+    </svg>
+  </div>
+
+  <div class="wave bottom-right">
+    <svg viewBox="0 0 600 400" preserveAspectRatio="none">
+      <path class="dotted" d="M0,200 C150,150 300,250 450,200 S750,150 900,200" />
+      <path class="dotted" d="M0,230 C150,180 300,280 450,230 S750,180 900,230" />
+    </svg>
+  </div>
+
+  <header>
+    <h1>Мои игрушки 🧸</h1>
+    <p>Все социальные сети</p>
+  </header>
+
+  <nav class="links">
+    <a class="btn" href="https://vk.com/ТВОЙ_ВК" target="_blank">ВКонтакте</a>
+    <a class="btn" href="https://t.me/ТВОЙ_ТЕЛЕГРАМ" target="_blank">Telegram</a>
+    <a class="btn" href="https://www.avito.ru/user/ТВОЙ_АВИТО" target="_blank">Avito</a>
+  </nav>
+
+</body>
+</html>

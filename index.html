@@ -21,7 +21,7 @@
       height: 100%; 
       margin: 0; 
       padding: 0; 
-      overflow: hidden; /* Отключаем прокрутку */
+      overflow: hidden; 
     }
 
     body {
@@ -37,7 +37,6 @@
       min-height: 100vh;
     }
 
-    /* Фоновые круги */
     .circle {
       position: absolute;
       border-radius: 50%;
@@ -47,7 +46,6 @@
     .circle.yellow { background: #ffd54f; }
     .circle.orange { background: #ff9800; }
 
-    /* Волны */
     .wave {
       position: absolute;
       opacity: 0.65;
@@ -65,16 +63,15 @@
       stroke-dasharray: 0 14;
     }
 
-    /* Позиция волн */
     .wave.top-left {
-      top: -120px; /* 🔥 Переместили немного ниже */
+      top: -120px; 
       left: -100px;
       width: 700px;
       height: 400px;
       transform: rotate(-25deg);
     }
     .wave.bottom-right {
-      bottom: -80px; /* 🔥 Переместили немного выше */
+      bottom: -80px;
       right: -100px;
       width: 700px;
       height: 400px;
@@ -88,7 +85,6 @@
       transform: rotate(-25deg);
     }
 
-    /* Заголовок */
     header {
       text-align: center;
       margin-bottom: 20px;
@@ -97,7 +93,6 @@
     h1 { margin: 0; font-size: 1.8rem; font-weight: 600; }
     p { margin: 5px 0 0; opacity: 0.8; }
 
-    /* Кнопки */
     .links {
       display: flex;
       flex-direction: column;
@@ -123,25 +118,21 @@
       transform: translateY(-1px);
     }
 
-    /* === Мобильные стили (убираем лишнее) === */
     @media (max-width: 768px) {
       body {
         overflow: hidden;
       }
 
-      /* Убираем нижнюю волну в левом верхнем углу */
       .wave.top-left-lower {
         display: none !important;
       }
 
-      /* Убираем лишние круги */
       .circle.yellow:nth-child(3),
       .circle.orange:nth-child(6),
       .circle.yellow:nth-child(5) {
         display: none;
       }
 
-      /* Корректируем размеры волн */
       .wave.top-left,
       .wave.bottom-right {
         width: 500px;
@@ -158,8 +149,6 @@
     @media (max-width: 480px) {
       h1 { font-size: 1.5rem; }
       .btn { padding: 12px; font-size: 0.9rem; }
-
-      /* Делаем волны ещё короче на самых маленьких экранах */
       .wave.top-left,
       .wave.bottom-right {
         width: 400px;
@@ -176,7 +165,6 @@
 </head>
 <body>
 
-  <!-- Фоновые круги -->
   <div class="circle yellow" style="width:140px;height:140px;top:30px;left:50px;"></div>
   <div class="circle orange" style="width:90px;height:90px;top:220px;right:60px;"></div>
   <div class="circle yellow" style="width:70px;height:70px;bottom:50px;left:30px;"></div>
@@ -184,7 +172,6 @@
   <div class="circle yellow" style="width:120px;height:120px;top:180px;left:200px;"></div>
   <div class="circle orange" style="width:100px;height:100px;bottom:150px;right:100px;"></div>
 
-  <!-- Волны -->
   <div class="wave top-left">
     <svg viewBox="0 0 600 400" preserveAspectRatio="none">
       <path class="dotted" d="M0,200 C150,150 300,250 450,200 S750,150 900,200" />
@@ -205,7 +192,6 @@
     </svg>
   </div>
 
-  <!-- Основной контент -->
   <header>
     <h1>Мои игрушки 🧸</h1>
     <p>Все социальные сети</p>

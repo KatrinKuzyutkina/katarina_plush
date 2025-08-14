@@ -15,13 +15,15 @@
       --fg: #111;
       --dot-color: #ff9800;
     }
-  
+
     * { box-sizing: border-box; }
     html, body { 
       height: 100%; 
       margin: 0; 
       padding: 0; 
+      overflow: hidden; 
     }
+
     body {
       font-family: "Inter", sans-serif;
       background: linear-gradient(135deg, var(--bg-from), var(--bg-to));
@@ -32,8 +34,10 @@
       justify-content: center;
       padding: 20px;
       position: relative;
-      overflow: hidden;
+      min-height: 100vh;
+      touch-action: pan-y; 
     }
+
     .circle {
       position: absolute;
       border-radius: 50%;
@@ -81,7 +85,7 @@
       height: 400px;
       transform: rotate(-25deg);
     }
-  
+
     header {
       text-align: center;
       margin-bottom: 20px;
@@ -89,7 +93,7 @@
     }
     h1 { margin: 0; font-size: 1.8rem; font-weight: 600; }
     p { margin: 5px 0 0; opacity: 0.8; }
-  
+
     .links {
       display: flex;
       flex-direction: column;
@@ -98,7 +102,7 @@
       width: 100%;
       max-width: 320px;
     }
-  
+
     .btn {
       text-decoration: none;
       text-align: center;
@@ -114,52 +118,38 @@
       background: var(--btn-bg-hover);
       transform: translateY(-1px);
     }
-  
+
     @media (max-width: 768px) {
       body {
-        overflow-x: hidden;
+        overflow: hidden;
       }
-
       .wave.top-left-lower {
         width: 1000px !important;
         left: -120px !important;
         height: 300px !important;
       }
-  
-      .wave.top-left,
-      .wave.bottom-right {
+      .wave.top-left, .wave.bottom-right {
         width: 500px;
         height: 300px;
       }
-      .wave.top-left {
-        left: -50px;
-      }
-      .wave.bottom-right {
-        right: -50px;
-      }
+      .wave.top-left { left: -50px; }
+      .wave.bottom-right { right: -50px; }
     }
-  
+
     @media (max-width: 480px) {
       h1 { font-size: 1.5rem; }
       .btn { padding: 12px; font-size: 0.9rem; }
-
       .wave.top-left-lower {
         width: 1100px !important;
         left: -140px !important;
         height: 280px !important;
       }
-  
-      .wave.top-left,
-      .wave.bottom-right {
+      .wave.top-left, .wave.bottom-right {
         width: 400px;
         height: 250px;
       }
-      .wave.top-left {
-        left: -40px;
-      }
-      .wave.bottom-right {
-        right: -40px;
-      }
+      .wave.top-left { left: -40px; }
+      .wave.bottom-right { right: -40px; }
     }
   </style>
 </head>

@@ -2,206 +2,323 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>katarina_plush</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#ffb703" />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Nunito:wght@500;700&display=swap" rel="stylesheet">
+
   <style>
-    :root {
-      --bg-from: #ffe59e;
-      --bg-to: #ffb88e;
-      --border: #a97155;
-      --btn-bg: #fea45b;
-      --btn-bg-hover: #ffb06e;
-      --fg: #111;
-      --dot-color: #ff9800;
+    :root{
+      --bg1:#FFD166; 
+      --bg2:#FB8500; 
+      --card:#fff9f0; 
+      --text:#2b2d2f;
+      --sub:#3776ab;
+      --accent:#ffb703; 
+      --accent-2:#ff9f1c; 
+      --radius: 22px;
     }
 
     * { box-sizing: border-box; }
-    html, body { 
-      height: 100%; 
-      margin: 0; 
-      padding: 0; 
-      overflow: hidden; 
+    html, body { height: 100%; }
+
+    body{
+      margin:0;
+      background:
+        radial-gradient(1200px 800px at 20% -10%, #ffe29c, transparent 60%),
+        radial-gradient(1000px 700px at 110% 10%, #ffd38e, transparent 60%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      color: var(--text);
+      font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, "Noto Sans", sans-serif;
+      display:grid;
+      place-items:center;
+      padding: 32px 18px;
+    }
+    .wrap{ 
+      width: min(480px, 100%);
     }
 
-    body {
-      font-family: "Inter", sans-serif;
-      background: linear-gradient(135deg, var(--bg-from), var(--bg-to));
-      color: var(--fg);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+    .card{
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: clamp(18px, 4vw, 30px);
+    }
+
+    header{ display:flex; align-items:center; gap:16px; }
+
+    .avatar{
+      width:76px; height:76px; flex:0 0 76px; border-radius: 50%; display:grid; place-items:center;
+      background: conic-gradient(from 220deg, var(--accent), var(--accent-2));
+      box-shadow: inset 0 0 0 6px #fff, 0 10px 30px rgba(255,159,28,.35);
       position: relative;
-      min-height: 100vh;
     }
 
-    .circle {
-      position: absolute;
-      border-radius: 50%;
-      opacity: 0.35;
-      z-index: 0;
-    }
-    .circle.yellow { background: #ffd54f; }
-    .circle.orange { background: #ff9800; }
+    .avatar svg { width: 42px; height: 42px; }
 
-    .wave {
-      position: absolute;
-      opacity: 0.65;
-      z-index: 0;
-    }
-    .wave svg {
-      width: 100%;
-      height: 100%;
-    }
-    .dotted {
-      fill: none;
-      stroke: var(--dot-color);
-      stroke-width: 4;
-      stroke-linecap: round;
-      stroke-dasharray: 0 14;
-    }
+    .title{ line-height:1.15; }
+    .title h1{ margin: 0 0 6px 0; font-size: clamp(22px, 4.2vw, 34px); font-weight: 800; letter-spacing:.2px; }
+    .title p{ margin:0; color: var(--sub); font-family: 'Nunito', system-ui, sans-serif; font-weight: 600; font-size: clamp(14px, 2.8vw, 16px); }
 
-    .wave.top-left {
-      top: -120px; 
-      left: -100px;
-      width: 700px;
-      height: 400px;
-      transform: rotate(-25deg);
-    }
-    .wave.bottom-right {
-      bottom: -80px;
-      right: -100px;
-      width: 700px;
-      height: 400px;
-      transform: rotate(155deg);
-    }
-    .wave.top-left-lower {
-      top: 60px;
-      left: -100px;
-      width: 900px;
-      height: 400px;
-      transform: rotate(-25deg);
-    }
+    .links{ margin-top: 14px; display: grid; grid-template-columns: 1fr; gap: 12px; }
 
-    header {
-      text-align: center;
-      margin-bottom: 20px;
-      z-index: 1;
-    }
-    h1 { margin: 0; font-size: 1.8rem; font-weight: 600; }
-    p { margin: 5px 0 0; opacity: 0.8; }
-
-    .links {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      z-index: 1;
-      width: 100%;
-      max-width: 320px;
-    }
-
-    .btn {
-      text-decoration: none;
-      text-align: center;
-      padding: 14px;
-      border: 2px solid var(--border);
-      border-radius: 10px;
+    .link-card{
+      --btn-bg: #fff7eb;
+      display:flex; align-items:center; gap:14px; text-decoration:none; color: var(--text);
       background: var(--btn-bg);
-      color: var(--fg);
-      font-weight: 600;
-      transition: background 0.25s ease, transform 0.1s ease;
-    }
-    .btn:hover {
-      background: var(--btn-bg-hover);
-      transform: translateY(-1px);
-    }
-
-    @media (max-width: 768px) {
-      body {
-        overflow: hidden;
-      }
-
-      .wave.top-left-lower {
-        display: none !important;
-      }
-
-      .circle.yellow:nth-child(3),
-      .circle.orange:nth-child(6),
-      .circle.yellow:nth-child(5) {
-        display: none;
-      }
-
-      .wave.top-left,
-      .wave.bottom-right {
-        width: 500px;
-        height: 300px;
-      }
-      .wave.top-left {
-        left: -50px;
-      }
-      .wave.bottom-right {
-        right: -50px;
-      }
+      border: 1px solid rgba(251,133,0,.25);
+      border-radius: 16px; padding: 14px 16px;
+      box-shadow: 0 4px 14px rgba(0,0,0,.06);
+      transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+      position: relative;
+      overflow: hidden;
     }
 
-    @media (max-width: 480px) {
-      h1 { font-size: 1.5rem; }
-      .btn { padding: 12px; font-size: 0.9rem; }
-      .wave.top-left,
-      .wave.bottom-right {
-        width: 400px;
-        height: 250px;
+    .link-card:hover { 
+      transform: translateY(-2px); 
+      box-shadow: 0 10px 24px rgba(0,0,0,.12); 
+    }
+    .link-card:active { 
+      transform: translateY(0); 
+    }
+
+    .link-card::before { display: none; }
+
+    .link-card > * { position: relative; z-index: 1; }
+
+    .icon{ 
+      width: 34px; height: 34px; flex: 0 0 34px; border-radius: 10px; 
+      display:grid; place-items:center; 
+      background: linear-gradient(135deg, #fff, #ffe7c2); 
+      border: 1px solid rgba(0,0,0,.06); 
+    }
+    .icon svg{ width: 22px; height: 22px; }
+
+    .label{ font-weight: 700; }
+    .sub{ color: var(--sub); font-size: 14px; }
+
+    .btn-row{ display:flex; gap:10px; margin-top: 14px; flex-wrap: wrap; }
+
+    .btn{
+      display:inline-flex; align-items:center; gap:8px; padding: 10px 14px; border-radius: 999px; font-weight:700; text-decoration:none;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2)); color:#2b2b2b;
+      border:1px solid rgba(0,0,0,.06); box-shadow: 0 8px 18px rgba(251,133,0,.35);
+      position: relative; overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn:hover{ 
+      transform: translateY(-2px) scale(1.02); 
+      box-shadow: 0 12px 24px rgba(251, 133, 0, 0.4); 
+      filter: brightness(1.05); 
+    }
+    .btn:active{ 
+      transform: translateY(0) scale(0.98); 
+    }
+
+    footer{ text-align:center; color:#3f4347; font-size: 12.5px; margin-top: 16px; }
+
+    .particles { 
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; 
+    }
+    .particle { 
+      position: absolute; border-radius: 50%; background: rgba(255, 255, 255, 0.6); 
+      pointer-events: none; animation: float 15s infinite linear; 
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
+    }
+
+    .ripple { 
+      position: absolute; border-radius: 50%; background: rgba(255, 255, 255, 0.3); 
+      transform: scale(0); animation: ripple 0.6s linear; pointer-events: none; 
+    }
+    @keyframes ripple { to { transform: scale(4); opacity: 0; } }
+
+    .skeleton { 
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); 
+      background-size: 200% 100%; animation: loading 1.5s infinite; 
+    }
+    @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent-2); }
+
+    @media (min-width: 768px) {
+    .wrap {
+        width: min(600px, 100%);
+    }
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{ --card:#151515; --text:#f3f3f3; --sub:#c3c6ca; }
+      body{ color: var(--text); }
+      .card{ 
+        background: linear-gradient(180deg, rgba(30,30,30,.72), rgba(30,30,30,.64)); 
+        border-color: rgba(255,255,255,.16); 
       }
-      .wave.top-left {
-        left: -40px;
+      .icon{ 
+        background: linear-gradient(135deg, #2b2b2b, #3a3a3a); 
+        border-color: rgba(255,255,255,.08); 
       }
-      .wave.bottom-right {
-        right: -40px;
+      .link-card{ 
+        background: #2a241d; 
+        border-color: rgba(255,183,3,.25); 
+        box-shadow: 0 6px 16px rgba(0,0,0,.35); 
       }
     }
   </style>
 </head>
+
 <body>
+  <main class="wrap">
+    <section class="card">
+      <header>
+        <div class="avatar" aria-hidden="true" title="Вязаные игрушки">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 21c4.97 0 9-4.03 9-9s-4.03-9-9-9-9 4.03-9 9 4.03 9 9 9Z" stroke="#442c00" stroke-width="1.2"/>
+            <path d="M5 12c2-5 8-7 13-4" stroke="#442c00" stroke-width="1.2"/>
+            <path d="M6 15c3-4 9-5 12-2" stroke="#442c00" stroke-width="1.2"/>
+            <path d="M8 18c3-3 7-3 9-1" stroke="#442c00" stroke-width="1.2"/>
+            <path d="M20 6l2.5-2.5" stroke="#442c00" stroke-width="1.2"/>
+            <path d="M18.5 4.5 22 1" stroke="#442c00" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <div class="title">
+          <h1>Вязаные игрушки 🧸</h1>
+          <p>Все социальные сети</p>
+        </div>
+      </header>
 
-  <div class="circle yellow" style="width:140px;height:140px;top:30px;left:50px;"></div>
-  <div class="circle orange" style="width:90px;height:90px;top:220px;right:60px;"></div>
-  <div class="circle yellow" style="width:70px;height:70px;bottom:50px;left:30px;"></div>
-  <div class="circle orange" style="width:150px;height:150px;bottom:-40px;right:-40px;"></div>
-  <div class="circle yellow" style="width:120px;height:120px;top:180px;left:200px;"></div>
-  <div class="circle orange" style="width:100px;height:100px;bottom:150px;right:100px;"></div>
+      <div class="links" role="list">
 
-  <div class="wave top-left">
-    <svg viewBox="0 0 600 400" preserveAspectRatio="none">
-      <path class="dotted" d="M0,200 C150,150 300,250 450,200 S750,150 900,200" />
-      <path class="dotted" d="M0,230 C150,180 300,280 450,230 S750,180 900,230" />
-    </svg>
-  </div>
+        <a class="link-card" role="listitem" href="https://vk.com/your-vk" target="_blank" rel="noopener noreferrer" title="Перейти в VK">
+          <span class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 7h3.2l2.2 3.8L11 7h3l-2.6 4.6 3.1 5H11l-2-3-1.9 3H4l3.3-5L4 7Z" fill="currentColor"/>
+            </svg>
+          </span>
+          <div>
+            <div class="label">VK</div>
+          </div>
+        </a>
 
-  <div class="wave top-left-lower">
-    <svg viewBox="0 0 900 400" preserveAspectRatio="none">
-      <path class="dotted" d="M0,160 C200,120 400,200 600,160 S1000,120 1200,160" />
-    </svg>
-  </div>
+        <a class="link-card" role="listitem" href="https://t.me/your-telegram" target="_blank" rel="noopener noreferrer" title="Перейти в Telegram">
+          <span class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21.5 3.5 2.6 10.8c-.9.34-.87 1.62.04 1.92l4.66 1.55 1.85 5.28c.31.9 1.5.96 1.92.08l2.43-5.06 5.16 3.78c.78.57 1.9.14 2.1-.8l2.33-12.1c.2-1.03-.78-1.86-1.79-1.55Z" fill="currentColor"/>
+            </svg>
+          </span>
+          <div>
+            <div class="label">Telegram</div>
+          </div>
+        </a>
 
-  <div class="wave bottom-right">
-    <svg viewBox="0 0 600 400" preserveAspectRatio="none">
-      <path class="dotted" d="M0,200 C150,150 300,250 450,200 S750,150 900,200" />
-      <path class="dotted" d="M0,230 C150,180 300,280 450,230 S750,180 900,230" />
-    </svg>
-  </div>
+        <a class="link-card" role="listitem" href="https://www.avito.ru/user/your-avito" target="_blank" rel="noopener noreferrer" title="Перейти в Авито">
+          <span class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="7" cy="8" r="3" fill="currentColor"/>
+              <circle cx="15.2" cy="7" r="2.4" fill="currentColor"/>
+              <circle cx="17" cy="14.5" r="3.2" fill="currentColor"/>
+              <circle cx="9" cy="16.2" r="2.6" fill="currentColor"/>
+            </svg>
+          </span>
+          <div>
+            <div class="label">Авито</div>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
 
-  <header>
-    <h1>Мои игрушки 🧸</h1>
-    <p>Все социальные сети</p>
-  </header>
+  <div class="particles" id="particles"></div>
 
-  <nav class="links">
-    <a class="btn" href="https://vk.com/твой_вк" target="_blank">ВКонтакте</a>
-    <a class="btn" href="https://t.me/твой_телеграм" target="_blank">Telegram</a>
-    <a class="btn" href="https://www.avito.ru/user/твой_авито" target="_blank">Avito</a>
-  </nav>
+  <script>
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 20;
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
 
+        const size = Math.random() * 10 + 5;
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100 + 100;
+        const duration = Math.random() * 15 + 15;
+        const delay = Math.random() * 15;
+
+        Object.assign(particle.style, {
+          width: `${size}px`,
+          height: `${size}px`,
+          left: `${posX}%`,
+          top: `${posY}%`,
+          animationDuration: `${duration}s`,
+          animationDelay: `-${delay}s`,
+          opacity: String(Math.random() * 0.5 + 0.1)
+        });
+
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    function createRipple(event) {
+      const button = event.currentTarget;
+      const rect = button.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const x = event.clientX - rect.left - size / 2;
+      const y = event.clientY - rect.top - size / 2;
+
+      const ripple = document.createElement('span');
+      ripple.classList.add('ripple');
+      Object.assign(ripple.style, {
+        width: `${size}px`,
+        height: `${size}px`,
+        left: `${x}px`,
+        top: `${y}px`
+      });
+      button.appendChild(ripple);
+
+      setTimeout(() => { ripple.remove(); }, 600);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      createParticles();
+
+      const buttons = document.querySelectorAll('.btn, .link-card');
+      buttons.forEach(button => {
+        button.addEventListener('click', createRipple);
+        button.style.position = 'relative';
+        button.style.overflow = 'hidden';
+      });
+
+      const images = document.querySelectorAll('img');
+      images.forEach(img => {
+        const parent = img.parentElement;
+        if (parent) {
+          parent.classList.add('skeleton');
+          img.style.opacity = '0';
+          img.style.transition = 'opacity 0.3s ease';
+          img.onload = function() {
+            parent.classList.remove('skeleton');
+            img.style.opacity = '1';
+          };
+          img.onerror = function() {
+            parent.classList.remove('skeleton');
+            parent.style.background = 'rgba(0,0,0,0.1)';
+          };
+        }
+      });
+    });
+  </script>
 </body>
 </html>
